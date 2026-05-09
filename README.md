@@ -650,3 +650,13 @@ Example of a valid password: `Library@1`
 - The `.env` file must never be committed to GitHub
 - Pagination is available on `GET /books` using `?page=1&limit=10`
 - Overdue information is automatically calculated on `GET /books` and `GET /books/:id`
+
+---
+
+## 📮 API Documentation
+
+Interactive API documentation is available via Swagger UI when the server is running:
+
+```
+http://localhost:3000/api-docs
+```
