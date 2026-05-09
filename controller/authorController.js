@@ -42,12 +42,10 @@ exports.getAuthorById = async (req, res) => {
 
 exports.updateAuthor = async (req, res) => {
     try {
-        const { name, bio } = req.body;
-
-        const author = await Author.findByIdAndUpdate(
-            req.params.id,
-            { name, bio },
-            { new: true, runValidators: true }
+       const author = await Author.findByIdAndUpdate(
+        req.params.id,
+        { name, bio },
+        { returnDocument: "after", runValidators: true }
         );
 
         if (!author) {

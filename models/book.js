@@ -9,7 +9,8 @@ const bookSchema = new mongoose.Schema({
     issuedBy:  { type: mongoose.Schema.Types.ObjectId, ref: "Staff", default: null },
     issueDate:  { type: Date, default: null },
     returnDate: { type: Date, default: null },
-    borrowedAt: { type: Date, default: null },   // new field
+    borrowedAt: { type: Date, default: null },
+    returnedAt: { type: Date, default: null },
 },
 { timestamps: true });
 

@@ -2,18 +2,19 @@ const Staff = require("../models/staff");
 
 exports.createAttendant = async (req, res) => {
     try {
-        const { name, email, staffId, role } = req.body;
-
-        if (!name || !email || !staffId) {
-            return res.status(400).json({ message: "Name, email, and staffId are required" });
+    
+        const { name, email, staffId, role, password } = req.body;
+        // validate
+        if (!name || !email || !staffId || !password) {
+            return res.status(400).json({ message: "All fields including password are required" });
         }
-
-        const existing = await Staff.findOne({ $or: [{ email }, { staffId }] });
-
+        
+        const existing = await Staff.create({ name, email, staffId, role, password });
+        // checking for duplicates
         if (existing) {
             return res.status(400).json({ message: "Email or staffId already exists" });
         }
-
+        // create document
         const attendant = await Staff.create({ name, email, staffId, role });
 
         return res.status(201).json({ message: "Attendant created", data: attendant });

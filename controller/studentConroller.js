@@ -2,10 +2,10 @@ const Student = require("../models/student");
 
 exports.createStudent = async (req, res) => {
     try {
-        const { name, email, studentId } = req.body;
+        const { name, email, studentId, password } = req.body;
 
-        if (!name || !email || !studentId) {
-            return res.status(400).json({ message: "Name, email, and studentId are required" });
+        if (!name || !email || !studentId || !password) {
+            return res.status(400).json({ message: "All fields including password are required" });
         }
 
         const existing = await Student.findOne({ $or: [{ email }, { studentId }] });
@@ -14,14 +14,13 @@ exports.createStudent = async (req, res) => {
             return res.status(400).json({ message: "Email or studentId already exists" });
         }
 
-        const student = await Student.create({ name, email, studentId });
+        const student = await Student.create({ name, email, studentId, password });
 
         return res.status(201).json({ message: "Student created", data: student });
     } catch (err) {
         return res.status(500).json({ message: err.message });
     }
 };
-
 exports.getAllStudents = async (req, res) => {
     try {
         const students = await Student.find().sort({ createdAt: -1 });
