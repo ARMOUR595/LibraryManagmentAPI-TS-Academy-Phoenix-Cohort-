@@ -4,10 +4,6 @@ exports.createAuthor = async (req, res) => {
     try {
         const { name, bio } = req.body;
 
-        if (!name) {
-            return res.status(400).json({ message: "Name is required" });
-        }
-
         const author = await Author.create({ name, bio });
 
         return res.status(201).json({ message: "Author created", data: author });

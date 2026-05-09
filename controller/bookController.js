@@ -6,14 +6,6 @@ exports.createBook = async (req, res) => {
     try {
         const { title, ISBN, authors, returnDate } = req.body;
 
-        if (!title || !ISBN) {
-            return res.status(400).json({ message: "Title and ISBN are required" });
-        }
-
-        if (!authors || !Array.isArray(authors) || authors.length === 0) {
-            return res.status(400).json({ message: "At least one author ID is required" });
-        }
-
         const existing = await Book.findOne({ ISBN });
 
         if (existing) {
@@ -143,10 +135,6 @@ exports.deleteBook = async (req, res) => {
 exports.borrowBook = async (req, res) => {
     try {
         const { studentId, staffId, returnDate } = req.body;
-
-        if (!studentId || !staffId || !returnDate) {
-            return res.status(400).json({ message: "studentId, staffId, and returnDate are required" });
-        }
 
         const book = await Book.findById(req.params.id);
 

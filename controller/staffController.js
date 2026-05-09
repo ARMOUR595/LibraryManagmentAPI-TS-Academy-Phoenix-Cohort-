@@ -4,10 +4,6 @@ exports.createAttendant = async (req, res) => {
     try {
     
         const { name, email, staffId, role, password } = req.body;
-        // validate
-        if (!name || !email || !staffId || !password) {
-            return res.status(400).json({ message: "All fields including password are required" });
-        }
         
         const existing = await Staff.create({ name, email, staffId, role, password });
         // checking for duplicates
