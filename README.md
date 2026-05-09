@@ -24,7 +24,7 @@ cd library-management-api
 
 ### 2. Install dependencies
 ```bash
-npm install
+npm install express mongoose jsonwebtoken bcrypt dotenv
 ```
 
 ### 3. Create your `.env` file
@@ -38,7 +38,7 @@ JWT_EXPIRES_IN=1d
 
 ### 4. Start the server
 ```bash
-node --env-file=.env app.js
+node app .js
 ```
 
 Or with nodemon for development:
